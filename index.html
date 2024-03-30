@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8Ball Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <form id="playerForm" action="display.html" method="POST">
+        <h1>Welcome to 8Ball!</h1>
+        <label for="player1Name">Player 1:</label>
+        <input type="text" id="player1Name" name="player1Name" required><br><br>
+
+        <label for="player2Name">Player 2:</label>
+        <input type="text" id="player2Name" name="player2Name" required><br><br>
+
+        <input type="submit" value="Start Game">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#playerForm').submit(function() {
+                const player1Name = $('#player1Name').val();
+                const player2Name = $('#player2Name').val();
+
+                localStorage.setItem('player1Name', player1Name);
+                localStorage.setItem('player2Name', player2Name);
+            });
+        });
+    </script>
+</body>
+</html>

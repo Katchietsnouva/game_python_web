@@ -1,0 +1,7 @@
+#poolTableContainer svg{
+    width: 780px; /* or any other size */
+    height: 780px; /* maintain the aspect ratio */
+      /* maximum size, adjust as needed */
+    display: block;
+    margin: auto;
+}

